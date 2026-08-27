@@ -5,8 +5,11 @@
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 
-# LangChain (for @tool decorator and base classes)
-langchain-core==0.3.28
+# LangChain & DeepAgents (primary runtime harness)
+deepagents==0.7.9
+langchain==1.3.17
+langchain-core==1.6.0
+langgraph==1.2.11
 
 
 # Async SQLite

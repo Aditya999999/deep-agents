@@ -1,9 +1,10 @@
 """
-Tests for Agent Factory & Instance Caching per spec §24 & §25.1
+Tests for Agent Factory & Instance Caching with CompiledStateGraph per spec §24 & §25.1
 """
 
 import pytest
 from app.application.agent_factory_service import AgentFactoryService
+from langgraph.graph.state import CompiledStateGraph
 
 
 def test_agent_instance_cache():
@@ -16,16 +17,17 @@ def test_agent_instance_cache():
         "planning_enabled": False,
     }
 
-    # First access builds and caches
+    # First access builds CompiledStateGraph via create_deep_agent
     inst1 = factory.get_or_create_agent(config_v1)
-    assert inst1["name"] == "Test Agent"
+    assert inst1 is not None
+    assert isinstance(inst1, CompiledStateGraph)
 
     # Second access returns cached object
     inst2 = factory.get_or_create_agent(config_v1)
     assert inst1 is inst2
 
-    # Updating version invalidates old cache
+    # Updating version invalidates old cache and creates a new compiled graph
     config_v2 = dict(config_v1, version=2, name="Test Agent Updated")
     inst3 = factory.get_or_create_agent(config_v2)
-    assert inst3["name"] == "Test Agent Updated"
+    assert isinstance(inst3, CompiledStateGraph)
     assert inst3 is not inst1

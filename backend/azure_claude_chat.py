@@ -21,8 +21,7 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.outputs import ChatGeneration, ChatResult
-from langchain_core.tools import BaseTool
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 from app.core.logging import get_logger
 
@@ -41,15 +40,14 @@ class AzureClaudeChat(BaseChatModel):
     Communicates directly with Azure AI Services / Anthropic endpoints.
     """
 
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     api_key: str = Field(default="")
     base_url: str = Field(default="")
     model: str = Field(default="claude-sonnet-4-5-forgex-rnd")
     temperature: float = Field(default=0.0)
     max_tokens: int = Field(default=8192)
     tools: Optional[List[Any]] = Field(default=None)
-
-    class Config:
-        arbitrary_types_allowed = True
 
     @property
     def _llm_type(self) -> str:
