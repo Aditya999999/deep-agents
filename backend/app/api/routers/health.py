@@ -1,0 +1,12 @@
+"""
+ForgeX — Health Check Router
+"""
+
+from fastapi import APIRouter
+
+router = APIRouter(tags=["health"])
+
+
+@router.get("/api/health")
+async def health_check():
+    return {"status": "healthy", "service": "ForgeX Deep Agent Platform", "version": "1.0.0"}

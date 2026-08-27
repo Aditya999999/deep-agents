@@ -1,0 +1,48 @@
+# ForgeX Deep Agent Platform — Backend Dependencies
+# Pinned for reproducibility per spec §27
+
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# LangChain (for @tool decorator and base classes)
+langchain-core==0.3.28
+
+
+# Async SQLite
+aiosqlite==0.20.0
+sqlalchemy[asyncio]==2.0.36
+
+# Pydantic settings
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# SSE streaming
+sse-starlette==2.2.1
+
+# HTTP client (for tools)
+httpx==0.28.1
+
+# Markdown processing
+markdown==3.7
+
+# Safe math expression parsing
+asteval==1.0.5
+
+# File processing
+python-multipart==0.0.20
+aiofiles==24.1.0
+
+# CORS & ASGI
+starlette>=0.40.0,<0.42.0
+
+# UUID generation
+uuid6==2024.7.10
+
+# YAML parsing for skills
+pyyaml==6.0.2
+
+# Dev/test
+pytest==8.3.4
+pytest-asyncio==0.25.0
+httpx==0.28.1
